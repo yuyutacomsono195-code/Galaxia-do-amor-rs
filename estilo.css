@@ -1,0 +1,82 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+body {
+    background: linear-gradient(to bottom, #0d001a, #1a0033, #2d004d);
+    height: 100vh;
+    font-family: Arial, sans-serif;
+}
+
+/* Galáxia roxa */
+.galaxia {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #bf80ff 0%, #9933ff 25%, #6600cc 50%, #330066 70%, transparent 80%);
+    box-shadow: 
+        0 0 80px #9933ff,
+        0 0 120px #6600cc,
+        0 0 180px #4d0099;
+    animation: girar 20s linear infinite;
+}
+
+@keyframes girar {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Buraco Negro sugando */
+.buraco-negro {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #000000 40%, #1a0033 60%, transparent 75%);
+    box-shadow: 
+        0 0 30px #000,
+        0 0 50px #330066,
+        inset 0 0 30px #000;
+    z-index: 10;
+}
+
+/* Chuva de "eu te amo" */
+#chuva-amor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 5;
+}
+
+.amor {
+    position: absolute;
+    color: #dda0ff;
+    font-size: 18px;
+    font-weight: bold;
+    text-shadow: 0 0 5px #e0b3ff, 0 0 10px #cc99ff;
+    animation: cair linear forwards;
+}
+
+@keyframes cair {
+    0% {
+        transform: translateY(-50px) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0.3;
+    }
+}
