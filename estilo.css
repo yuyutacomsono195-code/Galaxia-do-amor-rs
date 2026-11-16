@@ -6,13 +6,92 @@
 }
 
 body {
-    background: linear-gradient(to bottom, #0d001a, #1a0033, #2d004d);
+    background: radial-gradient(ellipse at center, #1a1026 0%, #0b0512 40%, #000000 100%);
     height: 100vh;
     font-family: Arial, sans-serif;
+    position: relative;
 }
 
-/* Galáxia roxa */
-.galaxia {
+/* Estrelas de fundo */
+.estrelas {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+/* Via Láctea — nossa galáxia realista 🌌 */
+.via-lactea {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 650px;
+    height: 650px;
+    border-radius: 50%;
+    background: 
+        radial-gradient(circle at center, 
+            rgba(255, 248, 230, 0.9) 0%, 
+            rgba(255, 235, 200, 0.7) 8%,
+            rgba(255, 210, 160, 0.5) 15%,
+            rgba(200, 180, 150, 0.3) 25%,
+            transparent 45%),
+        radial-gradient(ellipse at center,
+            rgba(210, 200, 180, 0.25) 0%,
+            rgba(160, 150, 140, 0.15) 30%,
+            rgba(80, 70, 60, 0.08) 50%,
+            transparent 70%);
+    box-shadow:
+        0 0 60px rgba(255, 220, 180, 0.15),
+        0 0 120px rgba(200, 180, 160, 0.08);
+    animation: girar 80s linear infinite;
+    z-index: 2;
+}
+
+.via-lactea::before,
+.via-lactea::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform-origin: center center;
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.via-lactea::before {
+    width: 90%;
+    height: 90%;
+    margin: -45% 0 0 -45%;
+    background: conic-gradient(
+        from 0deg,
+        transparent 0deg,
+        rgba(255, 240, 220, 0.06) 40deg,
+        transparent 80deg,
+        transparent 180deg,
+        rgba(200, 180, 160, 0.05) 220deg,
+        transparent 260deg
+    );
+    animation: girar 65s linear infinite reverse;
+}
+
+.via-lactea::after {
+    width: 75%;
+    height: 75%;
+    margin: -37.5% 0 0 -37.5%;
+    background: conic-gradient(
+        from 90deg,
+        transparent 0deg,
+        rgba(230, 210, 180, 0.05) 35deg,
+        transparent 70deg,
+        transparent 180deg,
+        rgba(180, 160, 140, 0.04) 215deg,
+        transparent 250deg
+    );
+    animation: girar 50s linear infinite;
+}
+
+.poeira {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -20,12 +99,14 @@ body {
     width: 600px;
     height: 600px;
     border-radius: 50%;
-    background: radial-gradient(circle, #bf80ff 0%, #9933ff 25%, #6600cc 50%, #330066 70%, transparent 80%);
-    box-shadow: 
-        0 0 80px #9933ff,
-        0 0 120px #6600cc,
-        0 0 180px #4d0099;
-    animation: girar 20s linear infinite;
+    background:
+        radial-gradient(ellipse 80px 25px at 30% 45%, rgba(10, 8, 6, 0.4) 0%, transparent 70%),
+        radial-gradient(ellipse 60px 20px at 55% 30%, rgba(15, 12, 10, 0.35) 0%, transparent 70%),
+        radial-gradient(ellipse 90px 30px at 65% 60%, rgba(8, 6, 5, 0.4) 0%, transparent 70%),
+        radial-gradient(ellipse 50px 18px at 35% 65%, rgba(12, 10, 8, 0.3) 0%, transparent 70%);
+    animation: girar 80s linear infinite;
+    z-index: 3;
+    pointer-events: none;
 }
 
 @keyframes girar {
@@ -33,24 +114,28 @@ body {
     to { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
-/* Buraco Negro sugando */
+/* Buraco Negro no centro */
 .buraco-negro {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 120px;
-    height: 120px;
+    width: 90px;
+    height: 90px;
     border-radius: 50%;
-    background: radial-gradient(circle, #000000 40%, #1a0033 60%, transparent 75%);
-    box-shadow: 
-        0 0 30px #000,
-        0 0 50px #330066,
-        inset 0 0 30px #000;
+    background: radial-gradient(circle, 
+        #000000 35%, 
+        #0a0810 55%, 
+        #151020 70%,
+        transparent 85%);
+    box-shadow:
+        0 0 25px #000,
+        0 0 45px rgba(30, 20, 50, 0.5),
+        inset 0 0 25px #000;
     z-index: 10;
 }
 
-/* Chuva de "eu te amo" */
+/* Chuva de "Eu te amo" 🦴🤍 */
 #chuva-amor {
     position: fixed;
     top: 0;
@@ -63,20 +148,24 @@ body {
 
 .amor {
     position: absolute;
-    color: #dda0ff;
-    font-size: 18px;
-    font-weight: bold;
-    text-shadow: 0 0 5px #e0b3ff, 0 0 10px #cc99ff;
+    color: #f0e6d8;
+    font-size: 17px;
+    font-weight: 500;
+    text-shadow: 0 0 8px rgba(255, 250, 240, 0.5);
     animation: cair linear forwards;
+    letter-spacing: 1px;
 }
 
 @keyframes cair {
     0% {
         transform: translateY(-50px) rotate(0deg);
-        opacity: 1;
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.9;
     }
     100% {
         transform: translateY(100vh) rotate(360deg);
-        opacity: 0.3;
+        opacity: 0.2;
     }
 }
